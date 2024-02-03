@@ -27,7 +27,7 @@ export class Cell {
     this.x = i * width
     this.y = j * width
     this.width = width
-    this.mine = this.p.random(1) < 0.5 // 50% chance of being a mine
+    this.mine = false
     this.neighbourCount = 0
     this.grid = grid
   }
@@ -51,13 +51,15 @@ export class Cell {
       } else {
         this.p.fill(200) // Fill the cell with a light grey color
         this.p.rect(this.x, this.y, this.width, this.width) // Draw a rectangle to represent a safe cell
-        this.p.textAlign(this.p.CENTER) // Center the text
-        this.p.fill(0)
-        this.p.text(
-          this.neighbourCount,
-          this.x + this.width * 0.5,
-          this.y + this.width / 1.5
-        ) // Draw the number of mines around the cell (if any
+        if (this.neighbourCount > 0) {
+          this.p.textAlign(this.p.CENTER) // Center the text
+          this.p.fill(0)
+          this.p.text(
+            this.neighbourCount,
+            this.x + this.width * 0.5,
+            this.y + this.width / 1.5
+          ) // Draw the number of mines around the cell (if any
+        }
       }
     }
   }
