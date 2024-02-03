@@ -19,10 +19,17 @@ const sketch = (p: p5) => {
       for (let j = 0; j < ROWS; j++) {
         grid[i][j] = new Cell({
           instance: p,
-          x: i * CELL_SIZE,
-          y: j * CELL_SIZE,
+          i: i,
+          j: j,
           width: CELL_SIZE,
+          grid: grid,
         })
+      }
+    }
+
+    for (let i = 0; i < COLS; i++) {
+      for (let j = 0; j < ROWS; j++) {
+        grid[i][j].countMines()
       }
     }
   }
@@ -37,12 +44,13 @@ const sketch = (p: p5) => {
   }
 
   p.mousePressed = () => {
-    for (let i = 0; i < COLS; i++) {
-      for (let j = 0; j < ROWS; j++) {
-        if (grid[i][j].contains(p.mouseX, p.mouseY)) {
-          console.log('Clicked on cell', i, j)
-        }
-      }
+    const col = Math.floor(p.mouseX / CELL_SIZE)
+    const row = Math.floor(p.mouseY / CELL_SIZE)
+
+    if (col >= 0 && col < COLS && row >= 0 && row < ROWS) {
+      console.log('Clicked on cell', col, row)
+      grid[col][row].reveal()
+      grid[col][row].countMines()
     }
   }
 }
