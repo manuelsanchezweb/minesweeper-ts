@@ -81,6 +81,10 @@ export class Cell {
    */
   public reveal() {
     this.revealed = true
+
+    if (this.neighbourCount === 0) {
+      this.floodFill()
+    }
   }
 
   /**
@@ -88,7 +92,8 @@ export class Cell {
    */
   public countMines() {
     if (this.mine) {
-      return -1
+      this.neighbourCount = -1
+      return
     }
 
     let total = 0
@@ -110,5 +115,27 @@ export class Cell {
     }
 
     this.neighbourCount = total
+  }
+
+  /**
+   * Flood fill the grid
+   */
+  private floodFill() {
+    for (let xOffset = -1; xOffset <= 1; xOffset++) {
+      for (let yOffset = -1; yOffset <= 1; yOffset++) {
+        let i = this.i + xOffset
+        let j = this.j + yOffset
+        if (
+          i > -1 &&
+          i < this.grid.length &&
+          j > -1 &&
+          j < this.grid[0].length
+        ) {
+          if (!this.grid[i][j].mine && !this.grid[i][j].revealed) {
+            this.grid[i][j].reveal()
+          }
+        }
+      }
+    }
   }
 }
