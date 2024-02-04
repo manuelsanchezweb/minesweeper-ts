@@ -31,9 +31,17 @@ const sketch = (p: p5) => {
    * Creates the canvas, initializes the grid, and sets up the game based on the selected difficulty level.
    */
   p.setup = () => {
-    p.createCanvas(400, 400)
-    COLS = Math.floor(p.width / CELL_SIZE)
-    ROWS = Math.floor(p.height / CELL_SIZE)
+    const isAtLeastTablet = window.matchMedia('(min-width: 768px)')
+    if (isAtLeastTablet.matches) {
+      p.createCanvas(400, 400)
+      COLS = Math.floor(p.width / CELL_SIZE)
+      ROWS = Math.floor(p.height / CELL_SIZE)
+    } else {
+      p.createCanvas(240, 240)
+      COLS = Math.floor(p.width / CELL_SIZE)
+      ROWS = Math.floor(p.height / CELL_SIZE)
+    }
+
     grid = make2DArray(COLS, ROWS)
 
     // Populate the grid with cells

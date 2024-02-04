@@ -21,11 +21,11 @@ body {
 }
 
 .container {
-  max-width: 600px;
+  max-width: 400px;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  text-align: center;
+  text-align: left;
 }
 
 .sr-only {

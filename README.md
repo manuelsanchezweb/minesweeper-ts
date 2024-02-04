@@ -22,3 +22,4 @@ This is an attempt to start doing more web accessible games using Canvas. In thi
 - √ Three levels of difficulty
 - √ Created by using TypeScript and TSDocs
 - √ Live information of the game using ARIA
+- √ Mobile simplified version
