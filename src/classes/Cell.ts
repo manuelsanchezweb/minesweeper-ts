@@ -1,4 +1,5 @@
 import p5 from 'p5'
+import { $ARIA_ACTION } from '../config'
 
 interface ICell {
   instance: p5
@@ -81,6 +82,22 @@ export class Cell {
    */
   public reveal() {
     this.revealed = true
+
+    if (this.mine) {
+      $ARIA_ACTION.textContent = `Mine revealed at row ${this.i + 1}, column ${
+        this.j + 1
+      }. Game over.`
+    } else {
+      const message =
+        this.neighbourCount > 0
+          ? `Revealed cell at row ${this.i + 1}, column ${this.j + 1}. ${
+              this.neighbourCount
+            } mines detected nearby.`
+          : `Revealed cell at row ${this.i + 1}, column ${
+              this.j + 1
+            }. No mines nearby.`
+      $ARIA_ACTION.textContent = message
+    }
 
     if (this.neighbourCount === 0) {
       this.floodFill()
