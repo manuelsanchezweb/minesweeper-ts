@@ -1,5 +1,4 @@
 import p5 from 'p5'
-import { $ARIA_ACTION } from '../config'
 
 interface ICell {
   instance: p5
@@ -18,7 +17,7 @@ export class Cell {
   private x: number
   private y: number
   private width: number
-  private neighbourCount: number
+  public neighbourCount: number
   private grid: Cell[][]
 
   constructor({ instance: p, i, j, width, grid }: ICell) {

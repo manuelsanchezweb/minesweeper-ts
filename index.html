@@ -2,19 +2,21 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Minesweeper TS</title>
   </head>
-  <body>
+  <body class="doodle">
     <select id="level-select">
       <option value="EASY">Easy</option>
       <option value="MEDIUM">Medium</option>
       <option value="HARD">Hard</option>
       <option value="HELL">Hell</option>
     </select>
-    <div data-a11y-general aria-live="polite" >Click to reveal</div>
-    <div data-a11y-action aria-live="polite" >You have not clicked anything yet</div>
+    <div class="container">
+      <div data-a11y-general aria-live="polite" >Click to reveal</div>
+      <div data-a11y-action aria-live="polite" >You have not clicked anything yet</div>
+    </div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

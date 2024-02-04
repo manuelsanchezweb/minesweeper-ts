@@ -13,6 +13,8 @@ export const MINES_PER_LEVEL = {
   HELL: 99,
 }
 
+export type LevelPossibility = 'EASY' | 'MEDIUM' | 'HARD' | 'HELL'
+
 /**
  * The ARIA live region element
  */
