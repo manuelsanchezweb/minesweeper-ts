@@ -36,13 +36,21 @@ export class Cell {
   /**
    * Show the cell on the canvas
    */
-  public show() {
+  public show(currentRow: number, currentCol: number) {
     this.p.stroke(0) // Draw a black border around the cell
     this.p.noFill() // Don't fill the cell
     this.p.rect(this.x, this.y, this.width, this.width) // Draw a rectangle to represent a safe cell
 
+    if (this.j === currentRow && this.i === currentCol) {
+      this.p.stroke(255, 0, 0) // Example: red stroke for the selected cell
+      this.p.strokeWeight(2) // Make the selection border thicker
+      this.p.rect(this.x + 1, this.y + 1, this.width - 2, this.width - 3)
+    }
+
     if (this.revealed) {
+      let ariaMsg = `Row ${this.j + 1}, Column ${this.i + 1}: `
       if (this.mine) {
+        ariaMsg += 'Mine. Game Over.'
         this.p.fill(127) // Fill the cell with a grey color
         this.p.ellipse(
           this.x + this.width * 0.5,
@@ -52,6 +60,7 @@ export class Cell {
       } else {
         this.p.fill(200) // Fill the cell with a light grey color
         this.p.rect(this.x, this.y, this.width, this.width) // Draw a rectangle to represent a safe cell
+
         if (this.neighbourCount > 0) {
           this.p.textAlign(this.p.CENTER) // Center the text
           this.p.fill(0)
@@ -82,22 +91,6 @@ export class Cell {
    */
   public reveal() {
     this.revealed = true
-
-    if (this.mine) {
-      $ARIA_ACTION.textContent = `Mine revealed at row ${this.i + 1}, column ${
-        this.j + 1
-      }. Game over.`
-    } else {
-      const message =
-        this.neighbourCount > 0
-          ? `Revealed cell at row ${this.i + 1}, column ${this.j + 1}. ${
-              this.neighbourCount
-            } mines detected nearby.`
-          : `Revealed cell at row ${this.i + 1}, column ${
-              this.j + 1
-            }. No mines nearby.`
-      $ARIA_ACTION.textContent = message
-    }
 
     if (this.neighbourCount === 0) {
       this.floodFill()
