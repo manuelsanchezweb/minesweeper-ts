@@ -4,7 +4,7 @@
 
 # Minesweeping with TypeScript
 
-Done for educational purposes. Deploy [here]()
+Done for educational purposes. Deploy [here](https://minesweeper-ts-xi.vercel.app/)
 
 </div>
 
